@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="ru.malik.myApp3.server.business.types.Supplier" table="Supplier" >
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <version name="version" column="version" type="java.lang.Long"/>
+        <property name="name" column="name"/>
+    </class>
+    <query name="ru.malik.myApp3.server.business.types.Supplier.findByName">
+        <![CDATA[select sp from Supplier sp where sp.name = ? ]]>
+    </query>
+
+</hibernate-mapping>

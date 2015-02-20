@@ -1,0 +1,58 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+
+             xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+             xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+             xmlns:widget="urn:import:ru.malik.myApp3.client.view.widget"
+             xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button">
+    <ui:style>
+        .centerMargin {
+            margin: 10px;
+        }
+    </ui:style>
+
+    <ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="outerData"/>
+    <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData"
+             field="northData"/>
+    <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData"
+             field="westData"/>
+    <ui:with type="com.sencha.gxt.widget.core.client.container.MarginData" field="centerData"/>
+    <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData"
+             field="eastData"/>
+    <ui:with type="com.sencha.gxt.widget.core.client.container.BorderLayoutContainer.BorderLayoutData"
+             field="southData"/>
+
+    <container:SimpleContainer>
+        <container:child layoutData="{outerData}">
+            <container:BorderLayoutContainer ui:field="con" borders="true">
+                <container:north layoutData="{northData}">
+                    <gxt:ContentPanel/>
+                </container:north>
+                <container:west layoutData="{westData}">
+                    <gxt:ContentPanel headerVisible="true" ui:field="westPanel">
+                        <container:VBoxLayoutContainer>
+                            <container:child>
+                                <button:TextButton ui:field="supplierBtn" text="Постащики"/>
+                            </container:child>
+                            <container:child>
+                                <button:TextButton ui:field="invoceForPaymentBtn"  text="Счета на оплату"/>
+                            </container:child>
+                            <container:child>
+                                <button:TextButton ui:field="buildProjectBtn"  text="Строительные проекты"/>
+                            </container:child>
+                        </container:VBoxLayoutContainer>
+                    </gxt:ContentPanel>
+
+                </container:west>
+                <container:center layoutData="{centerData}">
+                    <gxt:ContentPanel ui:field="centerPanel" headerVisible="false"/>
+                </container:center>
+                <container:east layoutData="{eastData}">
+                    <gxt:ContentPanel/>
+                </container:east>
+                <container:south layoutData="{southData}">
+                    <gxt:ContentPanel/>
+                </container:south>
+            </container:BorderLayoutContainer>
+        </container:child>
+    </container:SimpleContainer>
+</ui:UiBinder>

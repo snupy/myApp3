@@ -1,0 +1,13 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form"
+             xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container">
+    <container:VerticalLayoutContainer>
+        <container:child>
+            <form:FieldLabel text="Имя">
+                <form:widget>
+                    <form:TextField ui:field="nameField"/>
+                </form:widget>
+            </form:FieldLabel>
+        </container:child>
+    </container:VerticalLayoutContainer>
+</ui:UiBinder>

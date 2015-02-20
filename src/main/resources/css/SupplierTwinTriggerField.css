@@ -1,0 +1,55 @@
+@sprite .trigger {
+    gwt-image: 'triggerArrow';
+    height: 21px;
+    border-bottom: 1px solid;
+    border-bottom-color: #b5b8c8;
+    float: left;
+}
+
+@sprite .focus .trigger {
+    gwt-image: 'triggerArrowFocus';
+    height: 21px;
+    border-bottom-color: #7EADD9;
+}
+
+@sprite .focus .twinTrigger {
+    gwt-image: 'twinTriggerArrowFocus';
+    height: 21px;
+    border-bottom-color: #7EADD9;
+}
+
+@sprite .twinTrigger {
+    gwt-image: 'twinTriggerArrow';
+    height: 21px;
+    border-bottom: 1px solid;
+    border-bottom-color: #b5b8c8;
+    float: left;
+}
+
+@sprite .triggerOver .trigger {
+    gwt-image: 'triggerArrowOver';
+    height: 21px;
+    border-bottom-color: #7EADD9;
+}
+
+@sprite .triggerClick .trigger {
+    gwt-image: 'triggerArrowClick';
+    height: 21px;
+    border-bottom-color: #7EADD9;
+}
+
+@sprite .twinTriggerOver .twinTrigger {
+    gwt-image: 'twinTriggerArrowOver';
+    height: 21px;
+    border-bottom-color: #7EADD9;
+}
+
+@sprite .twinTriggerClick .twinTrigger {
+    gwt-image: 'twinTriggerArrowClick';
+    height: 21px;
+    border-bottom-color: #7EADD9;
+}
+
+.noedit {
+    cursor: pointer;
+}

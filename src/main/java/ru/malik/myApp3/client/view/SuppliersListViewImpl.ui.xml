@@ -1,0 +1,35 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+
+             xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+             xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+
+             xmlns:toolbar="urn:import:com.sencha.gxt.widget.core.client.toolbar"
+             xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button"
+             xmlns:grid="urn:import:com.sencha.gxt.widget.core.client.grid">
+
+    <ui:with field="images" type="ru.malik.myApp3.client.resources.Images"/>
+    <ui:with field="store" type="com.sencha.gxt.data.shared.ListStore"/>
+    <ui:with field="cm" type="com.sencha.gxt.widget.core.client.grid.ColumnModel"/>
+    <ui:with field="view" type="com.sencha.gxt.widget.core.client.grid.GridView"/>
+    <ui:with field="sm" type="com.sencha.gxt.widget.core.client.grid.CheckBoxSelectionModel"/>
+
+    <gxt:FramedPanel headingText="Постащики">
+        <container:VerticalLayoutContainer borders="true">
+            <container:child>
+                <toolbar:ToolBar>
+                    <button:TextButton ui:field="addBtn" text="Добавить" icon="{images.addIco}"/>
+                    <button:TextButton ui:field="editBtn" text="Редактировать"/>
+                    <button:TextButton ui:field="deleteBtn" text="Удалить"/>
+
+                </toolbar:ToolBar>
+            </container:child>
+            <container:child>
+                <grid:Grid ui:field="grid" store="{store}" cm="{cm}" view="{view}" selectionModel="{sm}"/>
+            </container:child>
+            <container:child>
+                <toolbar:PagingToolBar ui:field="pagingToolBar" pageSize="50" />
+            </container:child>
+
+        </container:VerticalLayoutContainer>
+    </gxt:FramedPanel>
+</ui:UiBinder>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:property-placeholder location="classpath:properties/database.properties"/>
+
+    <bean name="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.hbm2ddl.auto">${hbm2ddl.auto}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+            </props>
+        </property>
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:hibernate/mapping/BuildingProject.xml</value>
+                <value>classpath:hibernate/mapping/InvoiceForPayment.xml</value>
+                <value>classpath:hibernate/mapping/Supplier.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean name="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean name="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="finderIntroductionAdvisor"
+          class="ru.malik.myApp3.server.repos.simple.FinderIntroductionAdvisor"/>
+
+    <bean id="abstractDaoTarget"
+          class="ru.malik.myApp3.server.repos.simple.GenericDaoHibernateImpl" abstract="true">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="abstractDao"
+          class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true">
+        <property name="interceptorNames">
+            <list>
+                <value>finderIntroductionAdvisor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="supplierDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>ru.malik.myApp3.server.repos.simple.SupplierDao</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>ru.malik.myApp3.server.business.types.Supplier</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="buildingProjectDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>ru.malik.myApp3.server.repos.simple.BuildingProjectDao</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>ru.malik.myApp3.server.business.types.BuildingProject</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="invoiceForPaymentDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>ru.malik.myApp3.server.repos.simple.InvoiceForPaymentDao</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>ru.malik.myApp3.server.business.types.InvoiceForPayment</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+</beans>

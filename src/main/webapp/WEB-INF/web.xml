@@ -1,0 +1,41 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:spring/applicationContext.xml</param-value>
+    </context-param>
+
+    <display-name>Archetype Created Web Application</display-name>
+
+     <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+    <servlet>
+        <servlet-name>gwtServlet</servlet-name>
+        <servlet-class>org.spring4gwt.server.SpringGwtRemoteServiceServlet</servlet-class>
+
+    </servlet>
+
+    <servlet>
+        <servlet-name>requestFactoryServlet</servlet-name>
+        <servlet-class>com.google.web.bindery.requestfactory.server.RequestFactoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>gwtServlet</servlet-name>
+        <url-pattern>/gwt/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>requestFactoryServlet</servlet-name>
+        <url-pattern>/gwtRequest</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>BuildingObject.html</welcome-file>
+    </welcome-file-list>
+
+</web-app>
